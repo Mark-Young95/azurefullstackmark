@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Counter</title>
+</head>
+<body>
+    <script>
+        async function registerClick() {
+            let userElem = document.querySelector("#username");
+            let passElem1 = document.querySelector("#pass1");
+            let passElem2 = document.querySelector("#pass2");
+            if (passElem1.value != passElem2.value) {
+                alert("Your password fields do not match.");
+            } else {
+                let url = "http://localhost:8080/users/register";
+                let user = {
+                    username: userElem.value,
+                    password: passElem1.value
+                }
+                let response = await fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json;charset=utf-8'
+                    },
+                    body: JSON.stringify(user)
+                });
+                let text = await response.text();
+                console.log(text);
+                if (text) { 
+                    alert('Registration good!');
+                    // window.location.href="counter.html";
+                } else {
+                    console.log(response.headers);
+                    alert(response.headers.get('errorMsg'));
+                }
+            }
+        }
+
+        async function loginClick() {
+            let userElem = document.querySelector("#usernameli");
+            let passElem = document.querySelector("#passwordli");
+            if (passElem1.value != passElem2.value) {
+                alert("Your password fields do not match.");
+            } else {
+                let url = "http://localhost:8080/users/register";
+                let user = {
+                    username: userElem.value,
+                    password: passElem1.value
+                }
+                let response = await fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json;charset=utf-8'
+                    },
+                    body: JSON.stringify(user)
+                });
+                let text = await response.text();
+                console.log(text);
+                if (text) { 
+                    alert('Registration good!');
+                    // window.location.href="counter.html";
+                } else {
+                    console.log(response.headers);
+                    alert(response.headers.get('errorMsg'));
+                }
+            }
+        }
+    </script>
+
+    <h2>Register</h2>
+
+    ******* Username: <input id="username" type="text" />
+    ******* Password: <input id="pass1" type="text" />
+    Confirm Password: <input id="pass2" type="text" />
+    <button id="register" type="button" onclick="registerClick()">Register</button>
+
+    <hr />
+
+    <h3>Or</h3>
+
+    <hr />
+
+    <h2>Log In</h2>
+
+    Username: <input id="usernameli" type="text" />
+    Password: <input id="passwordli" type="text" />
+    <button id="signin" type="button" onclick="loginClick">Log In</button>
+</body>
+</html>
