@@ -13,8 +13,8 @@
         let username = "";
         let numNum = 0;
         async function initCount() {
-            let url = "http://azurefullstackmark.azurewebsites.net/users?userId=" + userId;
-            //let url = "http://localhost:8080/users?userId=" + userId;
+            let url = "https://azurefullstackmark.azurewebsites.net/users?userId=" + userId;
+            //let url = "https://localhost:8080/users?userId=" + userId;
             let response = await fetch(url, {
                 method: 'GET'
             });
@@ -38,8 +38,8 @@
         }
 
         async function save() {
-            let saveUrl = "http://azurefullstackmark.azurewebsites.net/users/update";
-            //let saveUrl = "http://localhost:8080/users/update";
+            let saveUrl = "https://azurefullstackmark.azurewebsites.net/users/update";
+            //let saveUrl = "https://localhost:8080/users/update";
             // numCount = document.querySelector("#count").value;
             numId = userId;
             let updatedUser = {

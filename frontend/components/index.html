@@ -15,8 +15,8 @@
             if (passElem1.value != passElem2.value) {
                 alert("Your password fields do not match.");
             } else {
-                let url = "http://azurefullstackmark.azurewebsites.net/users/register";
-                //let url = "http://localhost:8080/users/register";
+                let url = "https://azurefullstackmark.azurewebsites.net/users/register";
+                //let url = "https://localhost:8080/users/register";
                 let user = {
                     username: userElem.value,
                     password: passElem1.value
@@ -42,8 +42,8 @@
         async function loginClick() {
             let userElem = document.querySelector("#usernameli");
             let passElem = document.querySelector("#passwordli");
-            let url = "http://azurefullstackmark.azurewebsites.net/users/login";
-            //let url = "http://localhost:8080/users/login";
+            let url = "https://azurefullstackmark.azurewebsites.net/users/login";
+            //let url = "https://localhost:8080/users/login";
             let user = {
                 username: userElem.value,
                 password: passElem.value
