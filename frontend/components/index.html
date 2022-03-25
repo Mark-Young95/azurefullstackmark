@@ -16,6 +16,7 @@
                 alert("Your password fields do not match.");
             } else {
                 let url = "http://azurefullstackmark.azurewebsites.net/users/register";
+                //let url = "http://localhost:8080/users/register";
                 let user = {
                     username: userElem.value,
                     password: passElem1.value
@@ -42,10 +43,12 @@
             let userElem = document.querySelector("#usernameli");
             let passElem = document.querySelector("#passwordli");
             let url = "http://azurefullstackmark.azurewebsites.net/users/login";
+            //let url = "http://localhost:8080/users/login";
             let user = {
                 username: userElem.value,
                 password: passElem.value
             }
+            console.log("waiting...");
             let response = await fetch(url, {
                 method: 'POST',
                 headers: {
@@ -53,7 +56,7 @@
                 },
                 body: JSON.stringify(user)
             });
-            let text = await response.text();
+            let text = await response.json();
             console.log(text);
             if (text) { 
                 alert('Login good!');
@@ -82,6 +85,6 @@
 
     Username: <input id="usernameli" type="text" />
     Password: <input id="passwordli" type="text" />
-    <button id="signin" type="button" onclick="loginClick">Log In</button>
+    <button id="signin" type="button" onclick="loginClick()">Log In</button>
 </body>
 </html>

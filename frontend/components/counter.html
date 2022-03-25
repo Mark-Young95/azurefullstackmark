@@ -8,51 +8,57 @@
 </head>
 <body>
     <script>
+
         let userId = (new URL(document.location)).searchParams.get("userId");
         let username = "";
-        async function init() {
-            
-            let url = "http://azurefullstackmark.azurewebsites.net/users"
+        let numNum = 0;
+        async function initCount() {
+            let url = "http://azurefullstackmark.azurewebsites.net/users?userId=" + userId;
+            //let url = "http://localhost:8080/users?userId=" + userId;
             let response = await fetch(url, {
-                method: 'GET',
-                body: userId
+                method: 'GET'
             });
             var text = await response.json();
-            document.querySelector("#count").value = text.count;
+            numNum = text.count
+            document.querySelector("#count").textContent = numNum;
             username = text.username;
-            document.querySelector("#welcome").value = "Welcome, " + username;
+            document.querySelector("#welcome").textContent = "Welcome, " + username;
         }
         
         function subtract() {
-            let oldNum = document.querySelector("#count").value;
-            document.querySelector("#count").value = oldNum - 1;
+            numNum = numNum - 1;
+            // let oldNum = document.querySelector("#count").textContent;
+            document.querySelector("#count").textContent = numNum;
         }
 
         function add() {
-            let oldNum = document.querySelector("#count").value;
-            document.querySelector("#count").value = oldNum + 1;
+            numNum = numNum + 1;
+            // let oldNum = document.querySelector("#count").textContent;
+            document.querySelector("#count").textContent = numNum;
         }
 
-        function save() {
+        async function save() {
             let saveUrl = "http://azurefullstackmark.azurewebsites.net/users/update";
-            numCount = document.querySelector("#count").value;
+            //let saveUrl = "http://localhost:8080/users/update";
+            // numCount = document.querySelector("#count").value;
             numId = userId;
             let updatedUser = {
                 userId: userId,
                 username: username,
-                count: numCount;
+                count: numNum
             }
             let response = await fetch(saveUrl, {
                 method: 'POST',
                 headers: {
                         'Content-Type': 'application/json;charset=utf-8'
                 },
-                body: JSON.stringify(updatedUser);
+                body: JSON.stringify(updatedUser)
             });
             let text = await response.text();
             if (!text) {
                 alert("error occurred");
             } else {
+                alert("Count saved!");
                 console.log("saved count to database");
             }
         }
@@ -67,18 +73,18 @@
     <br />
     <br />
     <button id="minus" onclick="subtract()">-</button>
-    <h3 id="count">0</h3>
+    <h3 id="count"></h3>
     <button id="plus" onclick="add()">+</button>
 
     <br />
-    <div />
+    <br />
     <button id="save" onclick="save()">Save</button>
 
 
     <br />
-    <div />
+    <br />
     <hr />
-    <div />
+    <br />
     <br />
     <button id="logout" onclick="logout()">Logout</button>
     

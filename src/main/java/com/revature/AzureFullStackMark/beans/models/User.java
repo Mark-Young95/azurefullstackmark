@@ -19,6 +19,8 @@ public class User {
     @Column
     private Integer count;
 
+    private User() {}
+
     public User(Integer userId, String username, String password, Integer count) {
         this.userId = userId;
         this.username = username;

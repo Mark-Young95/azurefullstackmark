@@ -118,7 +118,7 @@ public class UserController {
     }
 
     @GetMapping
-    public ResponseEntity<String> getUserById(@RequestBody Integer userId) throws JsonProcessingException {
+    public ResponseEntity<String> getUserById(@RequestParam Integer userId) throws JsonProcessingException {
         Optional<User> user = userRepo.findById(userId);
         if (user.isPresent()) {
             return ResponseEntity.ok().body(mapper.writeValueAsString(user.get()));
