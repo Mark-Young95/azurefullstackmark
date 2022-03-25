@@ -49,5 +49,5 @@ jobs:
         with:
           app-name: 'azureFullStackMark'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_D2CB6E0524784713BC802FA6BAFDC0A5 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_0C0DD8E161EE4D8CB65D97F79A88D0E1 }}
           package: '*.jar'
