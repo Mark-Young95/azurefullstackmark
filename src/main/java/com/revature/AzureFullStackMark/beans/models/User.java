@@ -19,7 +19,12 @@ public class User {
     @Column
     private Integer count;
 
-    public User() {}
+    public User(Integer userId, String username, String password, Integer count) {
+        this.userId = userId;
+        this.username = username;
+        this.password = password;
+        this.count = count;
+    }
 
     public User(String username, String password) {
         this.username = username;
@@ -27,9 +32,15 @@ public class User {
         //this.count = 0;
     }
 
-    public User(String username, String password, Integer count) {
+//    public User(String username, String password, Integer count) {
+//        this.username = username;
+//        this.password = password;
+//        this.count = count;
+//    }
+
+    public User(Integer userId, String username, Integer count) {
+        this.userId = userId;
         this.username = username;
-        this.password = password;
         this.count = count;
     }
 

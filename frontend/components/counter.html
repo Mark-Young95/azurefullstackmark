@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let userId = (new URL(document.location)).searchParams.get("userId");
+        let username = "";
+        async function init() {
+            
+            let url = "http://azurefullstackmark.azurewebsites.net/users"
+            let response = await fetch(url, {
+                method: 'GET',
+                body: userId
+            });
+            var text = await response.json();
+            document.querySelector("#count").value = text.count;
+            username = text.username;
+            document.querySelector("#welcome").value = "Welcome, " + username;
+        }
+        
+        function subtract() {
+            let oldNum = document.querySelector("#count").value;
+            document.querySelector("#count").value = oldNum - 1;
+        }
+
+        function add() {
+            let oldNum = document.querySelector("#count").value;
+            document.querySelector("#count").value = oldNum + 1;
+        }
+
+        function save() {
+            let saveUrl = "http://azurefullstackmark.azurewebsites.net/users/update";
+            numCount = document.querySelector("#count").value;
+            numId = userId;
+            let updatedUser = {
+                userId: userId,
+                username: username,
+                count: numCount;
+            }
+            let response = await fetch(saveUrl, {
+                method: 'POST',
+                headers: {
+                        'Content-Type': 'application/json;charset=utf-8'
+                },
+                body: JSON.stringify(updatedUser);
+            });
+            let text = await response.text();
+            if (!text) {
+                alert("error occurred");
+            } else {
+                console.log("saved count to database");
+            }
+        }
+
+        function logout() {
+            window.location.href = "index.html";
+        }
+        initCount();
+    </script>
+
+    <h1 id="welcome"></h1>
+    <br />
+    <br />
+    <button id="minus" onclick="subtract()">-</button>
+    <h3 id="count">0</h3>
+    <button id="plus" onclick="add()">+</button>
+
+    <br />
+    <div />
+    <button id="save" onclick="save()">Save</button>
+
+
+    <br />
+    <div />
+    <hr />
+    <div />
+    <br />
+    <button id="logout" onclick="logout()">Logout</button>
+    
+</body>
+</html>

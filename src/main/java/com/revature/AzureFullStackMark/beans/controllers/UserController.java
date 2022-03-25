@@ -117,12 +117,24 @@ public class UserController {
         }
     }
 
-    @PostMapping(value = "/update")
-    public Boolean updateCount(@RequestBody Integer userId, Integer count) {
+    @GetMapping
+    public ResponseEntity<String> getUserById(@RequestBody Integer userId) throws JsonProcessingException {
         Optional<User> user = userRepo.findById(userId);
         if (user.isPresent()) {
-            user.get().setCount(count);
-            userRepo.save(user.get());
+            return ResponseEntity.ok().body(mapper.writeValueAsString(user.get()));
+        }
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("errorMsg", "not a valid user");
+        return ResponseEntity.badRequest().headers(headers).build();
+    }
+
+    @PostMapping(value = "/update")
+    public Boolean updateCount(@RequestBody User user) {
+        Optional<User> foundUser = userRepo.findById(user.getUserId());
+        if (foundUser.isPresent()) {
+            foundUser.get().setCount(user.getCount());
+            userRepo.save(foundUser.get());
             return true;
         }
         return false;
