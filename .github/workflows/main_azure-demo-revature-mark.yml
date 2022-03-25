@@ -49,5 +49,5 @@ jobs:
         with:
           app-name: 'azure-demo-revature-mark'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_032DFEFD0AED432BACE7F57BA8289166 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_DBE2A08AA50B4D0890206B5715E0A1BA }}
           package: '*.jar'
